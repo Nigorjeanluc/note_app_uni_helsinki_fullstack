@@ -29,9 +29,6 @@ const unknownEndpoint = (request, response) => {
 //   response.send('<h1>Hello World!</h1>')
 // })
 
-
-app.use(unknownEndpoint)
-
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
     response.json(notes)
@@ -137,6 +134,7 @@ app.post('/api/notes', (request, response, next) => {
   }).catch(error => next(error))
 })
 
+app.use(unknownEndpoint)
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 3001
